@@ -23,9 +23,19 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    Text(
-                      "Welcome.",
-                      style: TextStyle(fontSize: 30),
+                    Padding(
+                      padding: EdgeInsets.only(top: 5),
+                      child: Text(
+                        "Welcome to",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 3,bottom: 10),
+                      child: Text(
+                        "Travelogue",
+                        style: TextStyle(fontSize: 30),
+                      ),
                     ),
                     Text(
                       "Get started by logging into\nyour account",
@@ -144,7 +154,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
               ),
             ]),
         Padding(
-          padding: const EdgeInsets.only(left: 5,right: 5),
+          padding: const EdgeInsets.only(left: 10,right: 10),
           child: SizedBox(
             width: double.infinity,
             child: ElevatedButton(

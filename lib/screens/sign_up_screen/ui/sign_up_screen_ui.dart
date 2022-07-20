@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_auth_api/constant/text_form_field_validator.dart';
-import 'package:testing_auth_api/screens/log_in_screen/bloc/log_in_bloc.dart';
+import 'package:testing_auth_api/screens/home_page_screen/ui/home_page_screen_ui.dart';
 import 'package:testing_auth_api/screens/log_in_screen/ui/log_in_screen_ui.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/bloc/sign_up_bloc.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/repository/registration_repository.dart';
@@ -194,6 +194,9 @@ class _SignUpScreenState extends State<SignUpScreen> with Validator {
                                   const SnackBar(
                                       backgroundColor: Colors.blue,
                                       content: Text("Logged in successfully")));
+                              Navigator.of(context).push(
+                                  MaterialPageRoute(builder: (context) => const HomePageScreen()
+                                  ));
                             }
                           },
                           builder: (context, state) {
@@ -215,8 +218,9 @@ class _SignUpScreenState extends State<SignUpScreen> with Validator {
                                 if (formKey.currentState!.validate()) {
                                   BlocProvider.of<SignUpBloc>(context).add(
                                       SignUpEvent(emailController.text.toString(),
+                                          passwordController.text.toString(),
                                           nameController.text.toString(),
-                                          passwordController.text.toString()));
+                                         ));
                                 }
                               },
                               style: ElevatedButton.styleFrom(
@@ -278,7 +282,7 @@ class _SignUpScreenState extends State<SignUpScreen> with Validator {
                         ),
                         onPressed: () {
                           Navigator.of(context).push(
-                              MaterialPageRoute(builder: (context) => LogInScreen()
+                              MaterialPageRoute(builder: (context) => const LogInScreen()
                               ));
                         },
                       )

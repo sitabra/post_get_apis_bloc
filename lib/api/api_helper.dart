@@ -8,6 +8,7 @@ mixin ApiHelper{
   final _dio = Dio();
 
   Future postTypeHelper (String endpoint, dynamic body) async {
+    log(body.toJson().toString());
     String url = Urls.baseUrl+endpoint;
     try{
       Response response = await _dio.post(url, data: body.toJson());

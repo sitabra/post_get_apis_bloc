@@ -1,13 +1,14 @@
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:testing_auth_api/screens/log_in_screen/bloc/log_in_bloc.dart';
 import 'package:testing_auth_api/screens/log_in_screen/repository/log_in_repository.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/ui/sign_up_screen_ui.dart';
 import 'package:testing_auth_api/widgets/custom_text_form_field.dart';
 import 'package:testing_auth_api/widgets/text_form_filed_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../home_page_screen/ui/home_page_screen_ui.dart';
 
 class LogInScreen extends StatefulWidget {
   const LogInScreen({Key? key}) : super(key: key);
@@ -21,6 +22,8 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
   final LogInBloc _logInBloc = LogInBloc(LogInRepository());
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  late SharedPreferences logInData;
+  late bool newUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -159,13 +162,18 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
                       }
                     },
                     child: BlocConsumer<LogInBloc, LogInState>(
-                      listener: (context, state) {
+                      listener: (context, state) async {
                         if (state is LogInStateLoaded) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   backgroundColor: Colors.blue,
                                   content: Text("Logged in successfully")));
-                        }
+                            logInData = await SharedPreferences.getInstance();
+                            logInData.setBool('login', true);
+                            logInData.setString('username', state.responseModel.data!.email.toString());
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) => const HomePageScreen()));
+                          }
                       },
                       builder: (context, state) {
                         if (state is LogInStateLoading) {
@@ -248,7 +256,7 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
                     ),
                     onPressed: () {
                       Navigator.of(context).push(
-                          MaterialPageRoute(builder: (context) => SignUpScreen()
+                          MaterialPageRoute(builder: (context) => const SignUpScreen()
                           ));
                     },
                   )
