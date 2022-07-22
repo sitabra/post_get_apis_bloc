@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> with Validator {
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: RichText(
                       text: const TextSpan(
                         style: TextStyle(color: Colors.black, fontSize: 20),

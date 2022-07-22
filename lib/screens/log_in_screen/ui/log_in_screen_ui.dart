@@ -24,6 +24,16 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
   TextEditingController passwordController = TextEditingController();
   late SharedPreferences logInData;
   late bool newUser;
+
+  void setSharedPref(String username, String token)async{
+    logInData = await SharedPreferences.getInstance();
+    logInData.setBool('login', true);
+    logInData.setString('username', username);
+    logInData.setString('token', token);
+
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,18 +172,15 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
                       }
                     },
                     child: BlocConsumer<LogInBloc, LogInState>(
-                      listener: (context, state) async {
+                      listener: (context, state) {
                         if (state is LogInStateLoaded) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
                                   backgroundColor: Colors.blue,
                                   content: Text("Logged in successfully")));
-                            logInData = await SharedPreferences.getInstance();
-                            logInData.setBool('login', true);
-                            logInData.setString('username', state.responseModel.data!.email.toString());
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) => const HomePageScreen()));
-                          }
+                          setSharedPref(state.responseModel.data!.email.toString(), state.responseModel.data!.token.toString());
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (context) => const HomePageScreen()));                          }
                       },
                       builder: (context, state) {
                         if (state is LogInStateLoading) {

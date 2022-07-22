@@ -1,11 +1,16 @@
+import 'dart:convert';
 import 'dart:developer';
 
+import 'package:flutter/foundation.dart';
 import 'package:testing_auth_api/api/api_helper.dart';
 import 'package:testing_auth_api/api/urls.dart';
+import 'package:testing_auth_api/screens/home_page_screen/model/user_model.dart';
 import 'package:testing_auth_api/screens/log_in_screen/models/request_model.dart';
 import 'package:testing_auth_api/screens/log_in_screen/models/response_model.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/model/request_model.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/model/response_model.dart';
+
+import '../screens/home_page_screen/model/user_request_modal.dart';
 
 class ApiProvider with ApiHelper{
 
@@ -37,5 +42,18 @@ class ApiProvider with ApiHelper{
       }
     }
     return null;
+  }
+
+  Future<UserResponseModel> fetchUserDetails(UserRequestModelPageWise requestModelPageWise) async {
+    final response = await getTypeHelper(Urls.usersUrl, requestModelPageWise);
+    log(response.toString());
+    print("I am here");
+    if (response["statusCode"] == 200) {
+      if (kDebugMode) {
+
+      }return UserResponseModel.fromJson(response["body"]);
+    } else {
+      throw Exception('Failed to load data');
+    }
   }
 }

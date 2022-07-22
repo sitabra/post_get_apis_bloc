@@ -1,7 +1,12 @@
+import 'dart:io';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_auth_api/constant/log_out.dart';
-import 'package:testing_auth_api/screens/log_in_screen/ui/log_in_screen_ui.dart';
+import 'package:testing_auth_api/screens/home_page_screen/bloc/user_bloc.dart';
+import '../../../widgets/custom_user_details_widget.dart';
+import '../repository/user_repository.dart';
 class HomePageScreen extends StatefulWidget {
   const HomePageScreen({Key? key}) : super(key: key);
 
@@ -10,26 +15,89 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen> with LogOut {
-  late SharedPreferences logInData;
-  void initial() async {
-    logInData = await SharedPreferences.getInstance();
+
+  final UserBloc _userBloc = UserBloc(UserRepository());
+
+  @override
+  void initState(){
+    super.initState();
+    _userBloc.add(const UserEvent("1"));
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Home Page"),
+        actions: [
+          IconButton(onPressed: () {
+            logOut(context);
+          },
+              icon: const Icon(Icons.logout))
+        ],
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ElevatedButton(onPressed: () {
-              logOut(context);
-            },
-                child: const Text("Log Out"),),
-          ],
+      body: SingleChildScrollView(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              BlocProvider<UserBloc>(
+                create: (context) => _userBloc,
+                  child: BlocConsumer<UserBloc, UserState>(
+                    listener: (context, state) {
+                      if (state is UserStateLoading) {
+                        const Center(child: CircularProgressIndicator());
+                      }
+                      if (state is UserStateLoaded) {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("Data Loaded Successfully")));
+                      }
+                      if (state is UserStateError) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message.toString())));
+
+                      }
+                    },
+                    builder: (context, state) {
+                      if (state is UserStateLoaded){
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.responseModel.data?.length,
+                            itemBuilder: (BuildContext context, index) {
+                            var userData = state.responseModel.data![index];
+                            return CustomUserDetailsWidget(
+                                userData.profilepicture.toString(),
+                                userData.name.toString(),
+                                userData.email.toString(),
+                                userData.createdat.toString(),
+                                (index+1).toString(),
+                                userData.iD.toString(),
+                                userData.id.toString(),
+                                userData.location.toString(),
+                            );
+                            }
+                        );
+                      }
+                      if (state is UserStateLoading) {
+                        return SizedBox(
+                          height: 60,
+                          width: MediaQuery.of(context).size.width,
+                          child: Center(
+                            child: Platform.isAndroid
+                                ? const CircularProgressIndicator(
+                              color: Colors.blue,
+                            )
+                                : const CupertinoActivityIndicator(),
+                          ),
+                        );
+                      }
+                      return const Center(child: CircularProgressIndicator());
+                    },
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
     );
