@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_auth_api/constant/log_out.dart';
 import 'package:testing_auth_api/screens/home_page_screen/bloc/user_bloc.dart';
+import 'package:testing_auth_api/widgets/text_form_filed_validator.dart';
 import '../../../widgets/custom_user_details_widget.dart';
 import '../repository/user_repository.dart';
 class HomePageScreen extends StatefulWidget {
@@ -14,23 +15,26 @@ class HomePageScreen extends StatefulWidget {
   State<HomePageScreen> createState() => _HomePageScreenState();
 }
 
-class _HomePageScreenState extends State<HomePageScreen> with LogOut {
-
+class _HomePageScreenState extends State<HomePageScreen> with LogOut, Validator {
+  TextEditingController idController = TextEditingController();
   final UserBloc _userBloc = UserBloc(UserRepository());
 
   @override
   void initState(){
     super.initState();
-    _userBloc.add(const UserEvent("1"));
+    _userBloc.add(const UserEvent("2"));
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(
+          onPressed: (){},
+            icon: const Icon(Icons.menu),),
         title: const Text("Home Page"),
         actions: [
+          IconButton(onPressed: () {},
+              icon: const Icon(Icons.search)),
           IconButton(onPressed: () {
             logOut(context);
           },
@@ -99,6 +103,25 @@ class _HomePageScreenState extends State<HomePageScreen> with LogOut {
             ],
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: (){
+            showModalBottomSheet(
+                context: context,
+                builder: (context) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      ListTile(
+                        leading: const Icon(Icons.add),
+                        title:  const Text('Add contact'),
+                        onTap: () {},
+                      ),
+                    ],
+                  );
+                });
+          },
+              child: const Icon(Icons.add),
       ),
     );
   }

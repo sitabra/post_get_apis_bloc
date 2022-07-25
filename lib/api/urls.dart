@@ -3,4 +3,5 @@ class Urls{
   static String loginUrl = "/api/authaccount/login";
   static String registrationUrl = "/api/authaccount/registration";
   static String usersUrl = "/api/users";
+  static String usersDetailsUrl = "/api/users/";
 }

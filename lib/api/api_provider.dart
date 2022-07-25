@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
@@ -11,6 +10,8 @@ import 'package:testing_auth_api/screens/sign_up_screen/model/request_model.dart
 import 'package:testing_auth_api/screens/sign_up_screen/model/response_model.dart';
 
 import '../screens/home_page_screen/model/user_request_modal.dart';
+import '../screens/profile_screen/models/user_details_response_model.dart';
+import '../screens/profile_screen/models/user_details_request_model.dart';
 
 class ApiProvider with ApiHelper{
 
@@ -46,12 +47,22 @@ class ApiProvider with ApiHelper{
 
   Future<UserResponseModel> fetchUserDetails(UserRequestModelPageWise requestModelPageWise) async {
     final response = await getTypeHelper(Urls.usersUrl, requestModelPageWise);
+    if (response["statusCode"] == 200) {
+      return UserResponseModel.fromJson(response["body"]);
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+  Future<UserDetailsResponseModel> fetchUserDetailsOnProfile(UserDetailsRequestModelIdWise requestModelIdWise) async {
+    final response = await getTypeHelper(Urls.usersDetailsUrl, requestModelIdWise);
     log(response.toString());
-    print("I am here");
+    if (kDebugMode) {
+      print("I am here");
+    }
     if (response["statusCode"] == 200) {
       if (kDebugMode) {
 
-      }return UserResponseModel.fromJson(response["body"]);
+      }return UserDetailsResponseModel.fromJson(response["body"]);
     } else {
       throw Exception('Failed to load data');
     }

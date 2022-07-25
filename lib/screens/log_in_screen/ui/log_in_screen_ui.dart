@@ -180,7 +180,9 @@ class _LogInScreenState extends State<LogInScreen> with Validator {
                                   content: Text("Logged in successfully")));
                           setSharedPref(state.responseModel.data!.email.toString(), state.responseModel.data!.token.toString());
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) => const HomePageScreen()));                          }
+                              MaterialPageRoute(builder: (context) => const HomePageScreen()
+                              ));
+                        }
                       },
                       builder: (context, state) {
                         if (state is LogInStateLoading) {

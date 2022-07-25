@@ -5,11 +5,11 @@ class CustomTextFormField extends StatelessWidget {
   final String labelText;
   final double? contentPaddingVertical;
   final double? contentPaddingHorizontal;
-  final FormFieldValidator<String?> validator;
+  final FormFieldValidator<String> validator;
   final AutovalidateMode autoValidateMode;
 
 
-  const CustomTextFormField({Key? key,
+  const   CustomTextFormField({Key? key,
     required this.controller,
     this.isDense,
     required this.labelText,
