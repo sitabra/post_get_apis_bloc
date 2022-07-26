@@ -1,5 +1,5 @@
 import '../../../api/api_provider.dart';
-import '../model/user_model.dart';
+import '../model/user_response_model.dart';
 import '../model/user_request_modal.dart';
 
 class UserRepository{

@@ -6,8 +6,8 @@ import 'package:testing_auth_api/screens/log_in_screen/bloc/log_in_bloc.dart';
 import 'package:testing_auth_api/screens/log_in_screen/repository/log_in_repository.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/ui/sign_up_screen_ui.dart';
 import 'package:testing_auth_api/widgets/custom_text_form_field.dart';
-import 'package:testing_auth_api/widgets/text_form_filed_validator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../utils/validator.dart';
 import '../../home_page_screen/ui/home_page_screen_ui.dart';
 
 class LogInScreen extends StatefulWidget {

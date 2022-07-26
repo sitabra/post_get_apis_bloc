@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../model/user_model.dart';
+import '../model/user_response_model.dart';
 import '../model/user_request_modal.dart';
 import '../repository/user_repository.dart';
 

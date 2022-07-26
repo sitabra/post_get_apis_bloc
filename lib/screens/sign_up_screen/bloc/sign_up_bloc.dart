@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:testing_auth_api/screens/sign_up_screen/model/request_model.dart';
-import 'package:testing_auth_api/screens/sign_up_screen/model/response_model.dart';
+import 'package:testing_auth_api/screens/sign_up_screen/model/sign_up_request_model.dart';
+import 'package:testing_auth_api/screens/sign_up_screen/model/sign_up_response_model.dart';
 import 'package:testing_auth_api/screens/sign_up_screen/repository/registration_repository.dart';
 
 part 'sign_up_event.dart';

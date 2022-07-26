@@ -15,4 +15,12 @@ mixin Validator{
       return "Please Enter Email";
     }
   }
+  validatePassword(String value) {
+    if (value.length != 6) {
+      return 'Enter Valid Password';
+    }
+    else {
+      return "Please Enter Password";
+    }
+  }
 }

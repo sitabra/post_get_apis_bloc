@@ -15,58 +15,57 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
+      Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
               Padding(
-                padding: const EdgeInsets.only(top: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Padding(
-                      padding: EdgeInsets.only(top: 5),
-                      child: Text(
-                        "Welcome to",
-                        style: TextStyle(fontSize: 20),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 3,bottom: 10),
-                      child: Text(
-                        "Travelogue",
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                    Text(
-                      "Get started by logging into\nyour account",
-                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
-                    ),
-                  ],
+                padding: EdgeInsets.only(top: 5),
+                child: Text(
+                  "Welcome to",
+                  style: TextStyle(fontSize: 20),
                 ),
               ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10, bottom: 20),
-              child: Container(
-                height: 300,
-                width: 300,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(200),
-                  color: Colors.white,
-                  boxShadow: const [
-                    BoxShadow(
-                      color: Colors.grey,
-                      blurRadius: 25.0, // soften the shadow
-                      spreadRadius: 5.0, //extend the shadow
-                      offset: Offset(
-                        10.0, // Move to right 10  horizontally
-                        10.0, // Move to bottom 10 Vertically
-                      ),
-                    )
-                  ],
+              Padding(
+                padding: EdgeInsets.only(top: 3, bottom: 10),
+                child: Text(
+                  "Travelogue",
+                  style: TextStyle(fontSize: 30),
                 ),
-                child: Image.asset('assets/images/logo.png'),
               ),
+              Text(
+                "Get started by logging into\nyour account",
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.w200),
+              ),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 10, bottom: 20),
+          child: Container(
+            height: 300,
+            width: 300,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(200),
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                  color: Colors.grey,
+                  blurRadius: 25.0, // soften the shadow
+                  spreadRadius: 5.0, //extend the shadow
+                  offset: Offset(
+                    10.0,
+                    10.0,
+                  ),
+                )
+              ],
             ),
+            child: Image.asset('assets/images/logo.png'),
+          ),
+        ),
         Column(
           children: [
             Row(
@@ -77,17 +76,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 25.0, // soften the shadow
-                          spreadRadius: 5.0, //extend the shadow
-                          offset: Offset(
-                            10.0, // Move to right 10  horizontally
-                            10.0, // Move to bottom 10 Vertically
-                          ),
-                        )
-                      ],
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 25.0, // soften the shadow
+                            spreadRadius: 5.0, //extend the shadow
+                            offset: Offset(
+                              10.0, // Move to right 10  horizontally
+                              10.0,
+                            ),
+                          )
+                        ],
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30)),
                     child: Padding(
@@ -107,14 +106,16 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                   onTap: () {},
                   child: Container(
                     decoration: BoxDecoration(
-                      boxShadow: const [
-                        BoxShadow(
-                        color: Colors.grey,
-                        blurRadius: 25.0, // soften the shadow
-                        spreadRadius: 5.0, //extend the shadow
-                        offset: Offset(
-                        10.0,
-                        10.0,),)
+                        boxShadow: const [
+                          BoxShadow(
+                            color: Colors.grey,
+                            blurRadius: 25.0, // soften the shadow
+                            spreadRadius: 5.0, //extend the shadow
+                            offset: Offset(
+                              10.0,
+                              10.0,
+                            ),
+                          )
                         ],
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(30)),
@@ -136,7 +137,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             ),
             Row(children: [
               Expanded(
-                child:  Container(
+                child: Container(
                     margin: const EdgeInsets.only(left: 10.0, right: 20.0),
                     child: Divider(
                       color: Colors.black.withOpacity(0.3),
@@ -153,25 +154,24 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     )),
               ),
             ]),
-        Padding(
-          padding: const EdgeInsets.only(left: 10,right: 10),
-          child: SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const LogInScreen()
-                    ));
-              },
-              style: ElevatedButton.styleFrom(
-                  primary: Colors.lightBlue,
-                  fixedSize: const Size(double.infinity, 40),
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(50))),
-              child: const Text('Log In'),
+            Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10),
+              child: SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) => const LogInScreen()));
+                  },
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.lightBlue,
+                      fixedSize: const Size(double.infinity, 40),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(50))),
+                  child: const Text('Log In'),
+                ),
+              ),
             ),
-          ),
-        ),
             Padding(
               padding: const EdgeInsets.only(top: 10),
               child: RichText(
@@ -181,13 +181,12 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     children: [
                       TextSpan(
                           text: ' Sign up',
-                          style:
-                            const  TextStyle(color: Colors.blueAccent, fontSize: 18),
+                          style: const TextStyle(
+                              color: Colors.blueAccent, fontSize: 18),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.of(context).push(
-                                  MaterialPageRoute(builder: (context) => const SignUpScreen()
-                                  ));
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const SignUpScreen()));
                             })
                     ]),
               ),

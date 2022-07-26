@@ -1,14 +1,12 @@
 import 'dart:developer';
-
 import 'package:flutter/foundation.dart';
 import 'package:testing_auth_api/api/api_helper.dart';
 import 'package:testing_auth_api/api/urls.dart';
-import 'package:testing_auth_api/screens/home_page_screen/model/user_model.dart';
-import 'package:testing_auth_api/screens/log_in_screen/models/request_model.dart';
-import 'package:testing_auth_api/screens/log_in_screen/models/response_model.dart';
-import 'package:testing_auth_api/screens/sign_up_screen/model/request_model.dart';
-import 'package:testing_auth_api/screens/sign_up_screen/model/response_model.dart';
-
+import 'package:testing_auth_api/screens/home_page_screen/model/user_response_model.dart';
+import 'package:testing_auth_api/screens/log_in_screen/models/log_in_request_model.dart';
+import 'package:testing_auth_api/screens/log_in_screen/models/log_in_response_model.dart';
+import 'package:testing_auth_api/screens/sign_up_screen/model/sign_up_request_model.dart';
+import 'package:testing_auth_api/screens/sign_up_screen/model/sign_up_response_model.dart';
 import '../screens/home_page_screen/model/user_request_modal.dart';
 import '../screens/profile_screen/models/user_details_response_model.dart';
 import '../screens/profile_screen/models/user_details_request_model.dart';
@@ -53,6 +51,7 @@ class ApiProvider with ApiHelper{
       throw Exception('Failed to load data');
     }
   }
+
   Future<UserDetailsResponseModel> fetchUserDetailsOnProfile(UserDetailsRequestModelIdWise requestModelIdWise) async {
     final response = await getTypeHelper(Urls.usersDetailsUrl, requestModelIdWise);
     log(response.toString());
