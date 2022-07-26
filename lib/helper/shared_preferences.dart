@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../screens/log_in_screen/ui/log_in_screen_ui.dart';
 
-mixin LogOut{
+mixin SharedPref{
   void logOut(BuildContext context){
     sPreference();
     Navigator.of(context).push(

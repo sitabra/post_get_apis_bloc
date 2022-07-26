@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:testing_auth_api/screens/home_page_screen/bloc/user_bloc.dart';
-import '../../../helper/log_out.dart';
+import '../../../helper/shared_preferences.dart';
 import '../../../utils/validator.dart';
 import '../../../widgets/custom_user_details_widget.dart';
 import '../repository/user_repository.dart';
@@ -17,7 +17,7 @@ class HomePageScreen extends StatefulWidget {
 }
 
 class _HomePageScreenState extends State<HomePageScreen>
-    with LogOut, Validator {
+    with SharedPref, Validator {
   TextEditingController idController = TextEditingController();
   final UserBloc _userBloc = UserBloc(UserRepository());
 
